@@ -55,7 +55,7 @@ public interface PortableDeviceObject {
     public String getSyncID();
     public Guid getFormat();
     
-    public void setSyncID(String value);	//TODO nog een exception kunnen gooien
+    public void setSyncID(String value);	//TODO can still throw an exception
     
     public void delete();
 }

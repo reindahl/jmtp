@@ -285,7 +285,7 @@ class PortableDeviceObjectImplWin32 implements PortableDeviceObject {
 			this.content.delete(Win32WPDDefines.PORTABLE_DEVICE_DELETE_NO_RECURSION, collection);
 		}
 		catch(COMException e) {
-			//TODO -> misschien een exception gooien?
+			//TODO -> maybe throw an exception?
 			e.printStackTrace();
 		}
 	}
