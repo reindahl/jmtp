@@ -110,7 +110,7 @@ abstract class AbstractPortableDeviceContainerImplWin32 extends PortableDeviceOb
 			PortableDeviceValuesImplWin32 values = new PortableDeviceValuesImplWin32();
 			values.setStringValue(Win32WPDDefines.WPD_OBJECT_PARENT_ID, this.objectID);
 			values.setStringValue(Win32WPDDefines.WPD_OBJECT_ORIGINAL_FILE_NAME, file.getName());
-			values.setGuidValue(Win32WPDDefines.WPD_OBJECT_FORMAT, Win32WPDDefines.WPD_OBJECT_FORMAT_MP3);	//TODO nog manier vinden om type te detecteren
+			values.setGuidValue(Win32WPDDefines.WPD_OBJECT_FORMAT, Win32WPDDefines.WPD_OBJECT_FORMAT_MP3);	//TODO find another way to detect type
 			values.setGuidValue(Win32WPDDefines.WPD_OBJECT_CONTENT_TYPE, Win32WPDDefines.WPD_CONTENT_TYPE_AUDIO);
 			values.setStringValue(Win32WPDDefines.WPD_OBJECT_NAME, title);
 			if(artist != null)

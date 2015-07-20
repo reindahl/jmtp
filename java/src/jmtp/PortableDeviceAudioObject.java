@@ -25,6 +25,8 @@ import java.util.Date;
 /**
  *
  * @author Pieter De Rycke
+ * 
+ * equivalent to a file
  */
 public interface PortableDeviceAudioObject extends PortableDeviceObject {
     public String getTitle();

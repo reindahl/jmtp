@@ -31,7 +31,16 @@ import be.derycke.pieter.com.Guid;
 public interface PortableDeviceObject {
     
 	public String getID();
+	
+	/**
+	 * 
+	 * @return filename without extension
+	 */
 	public String getName();
+	/**
+	 * 
+	 * @return filename with extension
+	 */
     public String getOriginalFileName();
     public boolean canDelete();
     public boolean isHidden();
