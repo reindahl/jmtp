@@ -51,12 +51,12 @@ JNIEXPORT jstring JNICALL Java_jmtp_PortableDeviceContentImplWin32_createObjectW
 	jmethodID mid;
 
 
-	//Methode implementatie
+	//Methode implementation
 	pDeviceContent = GetPortableDeviceContent(env, obj);
 	jobjValuesReference = RetrieveCOMReferenceFromCOMReferenceable(env, jobjValues);
 	pDeviceObjectValues = (IPortableDeviceValues*)ConvertComReferenceToPointer(env, jobjValuesReference);
 	
-	//COM stream object aanmaken
+	//COM stream object create
 	mid = env->GetMethodID(env->FindClass("java/io/File"), "getAbsolutePath", "()Ljava/lang/String;");
 	jsFileLocation = (jstring)env->CallObjectMethod(jobjFile, mid);
 	wszFileLocation = (WCHAR*)env->GetStringChars(jsFileLocation, NULL);
@@ -65,8 +65,8 @@ JNIEXPORT jstring JNICALL Java_jmtp_PortableDeviceContentImplWin32_createObjectW
 
 	if(SUCCEEDED(hr))
 	{
-		//groote van het bestand bepalen
-		//(door een beperking in java op het gebied van unsigned integers, moeten we het wel in c++ doen)
+		// determine size of the file
+		//(due to a limitation in Java in the area of unsigned integers, we have to do it in c ++)
 		pFileStream->Stat(&fileStats, STATFLAG_NONAME);
 		pDeviceObjectValues->SetUnsignedLargeIntegerValue(WPD_OBJECT_SIZE, fileStats.cbSize.QuadPart);
 
@@ -77,7 +77,7 @@ JNIEXPORT jstring JNICALL Java_jmtp_PortableDeviceContentImplWin32_createObjectW
 		{
 			pDeviceStream->QueryInterface(IID_IPortableDeviceDataStream, (void**)&pDeviceDataStream);
 
-			//data kopieren
+			//copying data
 			pBuffer = new BYTE[dwBufferSize];
 			dwReadFromStream = 0;
 			do
@@ -247,7 +247,7 @@ JNIEXPORT jobject JNICALL Java_jmtp_PortableDeviceContentImplWin32_getProperties
 
 	if(SUCCEEDED(hr))
 	{
-		//smart reference object aanmaken
+		//smart reference object create
 		cls = env->FindClass("be/derycke/pieter/com/COMReference");
 		mid = env->GetMethodID(cls, "<init>", "(J)V");
 		jobjReference = env->NewObject(cls, mid, pProperties);

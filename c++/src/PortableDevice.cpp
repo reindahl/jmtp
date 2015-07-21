@@ -185,7 +185,7 @@ JNIEXPORT jobject JNICALL Java_jmtp_PortableDeviceImplWin32_sendCommand
 
 	pDevice = GetPortableDevice(env, obj);
 
-	//clientinfo value object opvragen
+	//clientinfo value object retrieve
 	mid = env->GetMethodID(env->GetObjectClass(values), "getReference", 
 		"()Lbe/derycke/pieter/com/COMReference;");
 	reference = env->CallObjectMethod(values, mid);
@@ -200,7 +200,7 @@ JNIEXPORT jobject JNICALL Java_jmtp_PortableDeviceImplWin32_sendCommand
 		return NULL;
 	}
 
-	//smart reference object aanmaken
+	//smart reference object create
 	cls = env->FindClass("be/derycke/pieter/com/COMReference");
 	mid = env->GetMethodID(cls, "<init>", "(J)V");
 	reference = env->NewObject(cls, mid, pValuesOut);

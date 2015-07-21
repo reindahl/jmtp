@@ -81,11 +81,9 @@ JNIEXPORT jobject JNICALL Java_jmtp_PortableDevicePropertiesImplWin32_getValues
 	jobject jobjReference;
 
 	pProperties = GetPortableDeviceProperties(env, obj);
-	mid = env->GetMethodID(env->GetObjectClass(jobjKeyCollection), "getReference", 
-		"()Lbe/derycke/pieter/com/COMReference;");
+	mid = env->GetMethodID(env->GetObjectClass(jobjKeyCollection), "getReference", "()Lbe/derycke/pieter/com/COMReference;");
 	jobjKeyCollectionReference = env->CallObjectMethod(jobjKeyCollection, mid);
-	pKeyCollection = 
-		(IPortableDeviceKeyCollection*)ConvertComReferenceToPointer(env, jobjKeyCollectionReference);
+	pKeyCollection = (IPortableDeviceKeyCollection*)ConvertComReferenceToPointer(env, jobjKeyCollectionReference);
 	wszObjectID = (WCHAR*)env->GetStringChars(jsObjectID, NULL);
 
 	hr = pProperties->GetValues(wszObjectID, pKeyCollection, &pValues);
