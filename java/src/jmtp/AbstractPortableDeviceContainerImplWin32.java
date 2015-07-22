@@ -28,7 +28,7 @@ import java.util.Date;
 import be.derycke.pieter.com.COMException;
 import be.derycke.pieter.com.OleDate;
 
-//gemeenschappelijke klasse voor storage en folder
+//common class for storage and directory
 abstract class AbstractPortableDeviceContainerImplWin32 extends PortableDeviceObjectImplWin32 {
 	
 	AbstractPortableDeviceContainerImplWin32(String objectID, PortableDeviceContentImplWin32 content,
@@ -94,6 +94,11 @@ abstract class AbstractPortableDeviceContainerImplWin32 extends PortableDeviceOb
 			e.printStackTrace();
             return null;
 		}
+	}
+	
+	public PortableDeviceAudioObject addAudioObject(File file) throws FileNotFoundException, IOException {
+		
+		return addAudioObject(file, null, null, null, null, null, null, -1);
 	}
 	
 	public PortableDeviceAudioObject addAudioObject(File file,

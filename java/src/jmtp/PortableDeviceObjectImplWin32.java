@@ -57,7 +57,7 @@ class PortableDeviceObjectImplWin32 implements PortableDeviceObject {
     }
     
     /**
-     * Een String property opvragen.
+     * A String property retrieval.
      * @param key
      * @return
      */
