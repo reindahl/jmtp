@@ -95,10 +95,11 @@ abstract class AbstractPortableDeviceContainerImplWin32 extends PortableDeviceOb
             return null;
 		}
 	}
-	
+
+	BigInteger bigIntDummy =new BigInteger("1");
 	public PortableDeviceAudioObject addAudioObject(File file) throws FileNotFoundException, IOException {
 		
-		return addAudioObject(file, null, null, null, null, null, null, -1);
+		return addAudioObject(file, "", "", bigIntDummy, null, null, null, -1);
 	}
 	
 	public PortableDeviceAudioObject addAudioObject(File file,

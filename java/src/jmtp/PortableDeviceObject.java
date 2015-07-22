@@ -34,7 +34,7 @@ public interface PortableDeviceObject {
 	
 	/**
 	 *  FIXME: removes the last "." and everything after it. this should only happen for files.
-	 * should not be used with folders or anything that dosnt have a file exstension, use getOriginalFileName() instead.
+	 * should not be used with folders or anything that dosnt have a file extension, use getOriginalFileName() instead.
 	 * @return filename without extension
 	 */
 	public String getName();
