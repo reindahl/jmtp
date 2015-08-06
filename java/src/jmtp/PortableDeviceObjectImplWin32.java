@@ -135,6 +135,8 @@ class PortableDeviceObjectImplWin32 implements PortableDeviceObject {
             return new OleDate(properties.getValues(objectID, keyCollection).getFloatValue(key));
     	}
     	catch(COMException e) {
+    		System.err.println(e);
+
     		return null;
     	}
     }
@@ -232,6 +234,8 @@ class PortableDeviceObjectImplWin32 implements PortableDeviceObject {
         return retrieveBooleanValue(Win32WPDDefines.WPD_OBJECT_ISSYSTEM);
     }
 
+    
+    //FIXME: returns always null due to a comException
     public Date getDateModified() {
         return retrieveDateValue(Win32WPDDefines.WPD_OBJECT_DATE_MODIFIED);
     }

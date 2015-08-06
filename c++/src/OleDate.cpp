@@ -46,23 +46,23 @@ JNIEXPORT jdouble JNICALL Java_be_derycke_pieter_com_OleDate_toDouble
 
 	cls = env->GetObjectClass(obj);
 
-	//jaar
+	//Year
 	mid = env->GetMethodID(cls, "getYear", "()I");
 	year = env->CallIntMethod(obj, mid);
 
-	//maand
+	//Month
 	mid = env->GetMethodID(cls, "getMonth", "()I");
 	month = env->CallIntMethod(obj, mid);
 
-	//dag
+	//day
 	mid = env->GetMethodID(cls, "getDate", "()I");
 	day = env->CallIntMethod(obj, mid);
 
-	//uren
+	//hour
 	mid = env->GetMethodID(cls, "getHours", "()I");
 	hour = env->CallIntMethod(obj, mid);
 
-	//minuten
+	//minute
 	mid = env->GetMethodID(cls, "getMinutes", "()I");
 	minute = env->CallIntMethod(obj, mid);
 
