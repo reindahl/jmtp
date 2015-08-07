@@ -20,7 +20,11 @@
 package jmtp;
 
 import java.math.BigInteger;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import be.derycke.pieter.com.COMException;
 import be.derycke.pieter.com.Guid;
@@ -128,6 +132,7 @@ class PortableDeviceObjectImplWin32 implements PortableDeviceObject {
     	}
     }
     
+    DateFormat format = new SimpleDateFormat("yyyy/mm/dd:HH:mm:SSS", Locale.ENGLISH);
     protected Date retrieveDateValue(PropertyKey key) {
     	try {
     		keyCollection.clear();
@@ -135,9 +140,19 @@ class PortableDeviceObjectImplWin32 implements PortableDeviceObject {
             return new OleDate(properties.getValues(objectID, keyCollection).getFloatValue(key));
     	}
     	catch(COMException e) {
-    		System.err.println(e);
-
-    		return null;
+    		
+//    		System.err.println(e);
+    		//TODO: tmp fix
+    			try {
+					return format.parse(properties.getValues(objectID, keyCollection).getStringValue(key));
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					return null;
+				} catch (COMException e1) {
+					System.err.println(e1);
+					return null;
+				}
     	}
     }
     
