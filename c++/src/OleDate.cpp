@@ -12,27 +12,27 @@ JNIEXPORT void JNICALL Java_be_derycke_pieter_com_OleDate_setDate
 
 	cls = env->GetObjectClass(obj);
 
-	//jaar
+	//year
 	mid = env->GetMethodID(cls, "setYear", "(I)V");
 	env->CallVoidMethod(obj, mid, date.GetYear());
 
-	//maand
+	//month
 	mid = env->GetMethodID(cls, "setMonth", "(I)V");
 	env->CallVoidMethod(obj, mid, date.GetMonth() - 1);
 
-	//dag
+	//day
 	mid = env->GetMethodID(cls, "setDate", "(I)V");
 	env->CallVoidMethod(obj, mid, date.GetDay());
 
-	//uren
+	//hour
 	mid = env->GetMethodID(cls, "setHours", "(I)V");
 	env->CallVoidMethod(obj, mid, date.GetHour());
 
-	//minuten
+	//minute
 	mid = env->GetMethodID(cls, "setMinutes", "(I)V");
 	env->CallVoidMethod(obj, mid, date.GetMinute());
 
-	//seconden
+	//seconde
 	mid = env->GetMethodID(cls, "setSeconds", "(I)V");
 	env->CallVoidMethod(obj, mid, date.GetSecond());
 }
