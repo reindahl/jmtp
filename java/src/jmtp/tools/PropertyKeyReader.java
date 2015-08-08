@@ -27,18 +27,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-import be.derycke.pieter.com.Guid;
 
 /**
- * TODO pla ondersteuning missing in PortableDevice.h
+ * TODO pla supportt missing in PortableDevice.h
  *	static final Guid WPD_OBJECT_FORMAT_PLA = new Guid(0xBA050000, 0xAE6C, 0x4804, new short[]{0x98, 0xBA, 0xC5, 0x7B, 0x46, 0x96, 0x5F, 0xe7});
  * 
  * @author Pieter De Rycke
  */
 public class PropertyKeyReader {
     
-    private static final String HEADER_FILE = 
-            "C:\\Documents and Settings\\Pieter De Rycke\\Bureaublad\\Include\\PortableDevice.h";
+    //file not included. part of Windows Driver Kit (WDK)
+	private static final String HEADER_FILE = "..\\c++\\src\\PortableDevice.h";
     
     private static final boolean PRINT_COMMENTS = false;
     
@@ -53,8 +52,7 @@ public class PropertyKeyReader {
     	BufferedReader reader = null;
     	try {
     		try {
-    			reader = 
-    				new BufferedReader(new InputStreamReader(new FileInputStream(header)));
+    			reader = new BufferedReader(new InputStreamReader(new FileInputStream(header)));
     			
     			String line = reader.readLine();
     			while(line != null) {
@@ -84,6 +82,8 @@ public class PropertyKeyReader {
     					if(parts[2].startsWith("L\"") && parts[2].endsWith("\"")) {
     						processString(parts[1], parts[2].substring(2, parts[2].length() - 1));
     					}    					
+    				}else if(PRINT_COMMENTS){
+    					buffer.append("//"+line);
     				}
     				
     				line = reader.readLine();
@@ -94,7 +94,9 @@ public class PropertyKeyReader {
     				reader.close();
     		}
     	}
-    	catch(IOException e) {}
+    	catch(IOException e) {
+    		e.printStackTrace();
+    	}
     }
     
     private void processPropertyKey(String name, String[] arguments) {
@@ -156,5 +158,6 @@ public class PropertyKeyReader {
     public static void main(String[] args) {
     	PropertyKeyReader reader = new PropertyKeyReader(new File(HEADER_FILE));
     	reader.save(new File("src\\jmtp"), "jmtp", "Win32WPDDefines");
+    	System.out.println("done");
     }
 }
