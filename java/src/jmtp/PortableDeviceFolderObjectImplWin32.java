@@ -37,9 +37,9 @@ class PortableDeviceFolderObjectImplWin32 extends AbstractPortableDeviceContaine
         try {
             String[] childIDs = content.listChildObjects(objectID);
             PortableDeviceObject[] objects = new PortableDeviceObject[childIDs.length];
-            for(int i = 0; i < childIDs.length; i++)
+            for(int i = 0; i < childIDs.length; i++){
             	objects[i] = WPDImplWin32.convertToPortableDeviceObject(childIDs[i], this.content, this.properties);
-            
+            } 
             return objects;
         }
         catch (COMException e) {

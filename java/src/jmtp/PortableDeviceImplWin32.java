@@ -19,6 +19,7 @@
 
 package jmtp;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import be.derycke.pieter.com.COM;
@@ -207,15 +208,20 @@ class PortableDeviceImplWin32 implements PortableDevice {
     public PortableDeviceObject[] getRootObjects() {
         try {
             PortableDeviceContentImplWin32 content = getDeviceContent();
-            PortableDevicePropertiesImplWin32 properties = 
-                    content.getProperties();
+            PortableDevicePropertiesImplWin32 properties = content.getProperties();
 
             String[] childIDs = content.listChildObjects(Win32WPDDefines.WPD_DEVICE_OBJECT_ID);
-            PortableDeviceObject[] objects = new PortableDeviceObject[childIDs.length];
-            for(int i = 0; i < childIDs.length; i++)
-            	objects[i] = WPDImplWin32.convertToPortableDeviceObject(childIDs[i], content, properties);
+   
+            ArrayList<PortableDeviceObject> objects = new ArrayList<>();
+            for(int i = 0; i < childIDs.length; i++){
+            	PortableDeviceObject tmpObject=WPDImplWin32.convertToPortableDeviceObject(childIDs[i], content, properties);
+            	//filter out card readers and some other non mtp objects....
+            	if(!(tmpObject.getID().length()>=2 && tmpObject.getID().subSequence(1, 3).equals(":\\"))){
+            		objects.add(tmpObject);
+            	}
+            }
             
-            return objects;
+            return objects.toArray(new PortableDeviceObject[objects.size()]);
         }
         catch (COMException e) {
         	if(e.getHresult() == COMException.E_POINTER) {
