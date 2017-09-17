@@ -29,7 +29,7 @@ import java.io.OutputStreamWriter;
 
 
 /**
- * TODO pla supportt missing in PortableDevice.h
+ * TODO pla support missing in PortableDevice.h
  *	static final Guid WPD_OBJECT_FORMAT_PLA = new Guid(0xBA050000, 0xAE6C, 0x4804, new short[]{0x98, 0xBA, 0xC5, 0x7B, 0x46, 0x96, 0x5F, 0xe7});
  * 
  * @author Pieter De Rycke

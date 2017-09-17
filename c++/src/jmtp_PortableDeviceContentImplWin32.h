@@ -1,6 +1,5 @@
 /*
- * Copyright 2007 Pieter De Rycke
- * 
+ *  
  * This file is part of JMTP.
  * 
  * JTMP is free software: you can redistribute it and/or modify
@@ -81,6 +80,15 @@ JNIEXPORT jobject JNICALL Java_jmtp_PortableDeviceContentImplWin32_getObjectIDsF
  */
 JNIEXPORT void JNICALL Java_jmtp_PortableDeviceContentImplWin32_cancel
   (JNIEnv *, jobject);
+
+
+/*
+* Class:     jmtp_PortableDeviceToHostImpl32
+* Method:    copyFromPortableDeviceToHost
+* Signature: (Ljava/lang/String;Ljava/lang/String;)V
+*/
+JNIEXPORT void JNICALL Java_jmtp_PortableDeviceContentImplWin32_copyFromPortableDeviceToHost
+(JNIEnv *, jobject, jstring, jstring);
 
 #ifdef __cplusplus
 }

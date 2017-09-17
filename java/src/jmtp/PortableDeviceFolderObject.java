@@ -24,7 +24,7 @@ package jmtp;
  *
  * @author Pieter De Rycke
  */
-public interface PortableDeviceFolderObject extends PortableDeviceObject, PortableDeviceContainerObject {
+public interface PortableDeviceFolderObject extends PortableDeviceContainerObject {
 
     public void delete(boolean recursive);
 }

@@ -22,14 +22,12 @@ package jmtp;
 import be.derycke.pieter.com.COMException;
 import be.derycke.pieter.com.COMReference;
 import java.io.File;
-
 /**
  *
  * @author Pieter De Rycke
  */
 class PortableDeviceContentImplWin32 {
     
-    @SuppressWarnings("unused")
 	private COMReference pDeviceContent;
     
     PortableDeviceContentImplWin32(COMReference pDeviceContent) {
@@ -37,12 +35,12 @@ class PortableDeviceContentImplWin32 {
     }
     
     /**
-     * Door een probleem met unsigned longs (ontbreken in java, regelt de c++ dll de file groote, moet dus niet
+     * Due to a problem with unsigned longs (missing in java, regelt de c++ dll de file groote, moet dus niet
      * ingesteld worden vanuit Java!)
      * 
      * @param values
      * @param file
-     * @return objectId van het nieuw aangemaakte object
+     * @return objectId of the newly created object
      * @throws COMException
      */
     native String createObjectWithPropertiesAndData(PortableDeviceValuesImplWin32 values,
@@ -59,6 +57,9 @@ class PortableDeviceContentImplWin32 {
     
     native PortableDevicePropVariantCollectionImplWin32 getObjectIDsFromPersistentUniqueIDs(
     		PortableDevicePropVariantCollectionImplWin32 persistentUniqueIDs) throws COMException;
+    
+    native void copyFromPortableDeviceToHost(String objectId, String destPath) throws COMException;
+    
     
     /**
      * The Cancel method cancels a pending operation called on this interface

@@ -20,6 +20,7 @@
 package jmtp;
 
 import java.math.BigInteger;
+import java.nio.file.Path;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -140,19 +141,19 @@ class PortableDeviceObjectImplWin32 implements PortableDeviceObject {
             return new OleDate(properties.getValues(objectID, keyCollection).getFloatValue(key));
     	}
     	catch(COMException e) {
-    		
-//    		System.err.println(e);
+
+    		//  System.err.println(e);
     		//TODO: tmp fix
-    			try {
-					return format.parse(properties.getValues(objectID, keyCollection).getStringValue(key));
-				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-					return null;
-				} catch (COMException e1) {
-					System.err.println(e1);
-					return null;
-				}
+    		try {
+    			return format.parse(properties.getValues(objectID, keyCollection).getStringValue(key));
+    		} catch (ParseException e1) {
+    			// TODO Auto-generated catch block
+    			e1.printStackTrace();
+    			return null;
+    		} catch (COMException e1) {
+    			System.err.println(e1);
+    			return null;
+    		}
     	}
     }
     
@@ -287,7 +288,7 @@ class PortableDeviceObjectImplWin32 implements PortableDeviceObject {
 		return retrieveStringValue(Win32WPDDefines.WPD_OBJECT_SYNC_ID);
 	}
 	
-	//TODO slechts tijdelijk de guids geven -> enum aanmaken
+	//TODO only give the guides temporarily -> create enums
 	public Guid getFormat() {
 		return retrieveGuidValue(Win32WPDDefines.WPD_OBJECT_FORMAT);
 	}
@@ -308,6 +309,17 @@ class PortableDeviceObjectImplWin32 implements PortableDeviceObject {
 			e.printStackTrace();
 		}
 	}
+	
+	@Override
+	public void get(Path to) {
+		try {
+			this.content.copyFromPortableDeviceToHost(objectID, to.toString());
+		}
+		catch(COMException e) {
+			//TODO -> maybe throw an exception?
+			e.printStackTrace();
+		}
+	}
     
     @Override
     public String toString() {
@@ -322,4 +334,6 @@ class PortableDeviceObjectImplWin32 implements PortableDeviceObject {
         else
             return false;
     }
+
+
 }

@@ -20,6 +20,7 @@
 package jmtp;
 
 import java.math.BigInteger;
+import java.nio.file.Path;
 import java.util.Date;
 
 import be.derycke.pieter.com.Guid;
@@ -61,4 +62,6 @@ public interface PortableDeviceObject {
     public void setSyncID(String value);	//TODO can still throw an exception
     
     public void delete();
+    
+    public void get(Path to);
 }

@@ -59,10 +59,10 @@ abstract class AbstractPortableDeviceContainerImplWin32 extends PortableDeviceOb
 			values.setStringValue(Win32WPDDefines.WPD_OBJECT_NAME, name);
 			values.setGuidValue(Win32WPDDefines.WPD_OBJECT_CONTENT_TYPE, Win32WPDDefines.WPD_CONTENT_TYPE_FOLDER);
 			
-			return new PortableDeviceFolderObjectImplWin32(content.createObjectWithPropertiesOnly(values),
-	        		this.content, this.properties);
+			return new PortableDeviceFolderObjectImplWin32(content.createObjectWithPropertiesOnly(values), this.content, this.properties);
         }
         catch (COMException e) {
+        	System.err.println(name);
         	e.printStackTrace();
             return null;
         }

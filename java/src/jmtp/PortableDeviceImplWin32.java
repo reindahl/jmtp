@@ -20,7 +20,6 @@
 package jmtp;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import be.derycke.pieter.com.COM;
 import be.derycke.pieter.com.COMException;
@@ -33,9 +32,7 @@ import be.derycke.pieter.com.COMReference;
 class PortableDeviceImplWin32 implements PortableDevice {
     
     private String deviceID;
-    @SuppressWarnings("unused")
 	private COMReference pDeviceManager;
-    @SuppressWarnings("unused")
 	private COMReference pDevice;
     
     private PortableDeviceContentImplWin32 content;
@@ -358,105 +355,5 @@ class PortableDeviceImplWin32 implements PortableDevice {
     	catch(COMException e) {
     		return false;
     	}
-    }
-    
-    public static void main(String[] args) {
-    	String id = "{00276159-0000-0000-0000-000000000000}";
-    	@SuppressWarnings("unused")
-		String wmp_id = "{00128F26-0000-0000-0000-000000000000}";
-    	
-    	
-    	PortableDeviceManager manager;
-    	PortableDevice device;
-    	PortableDeviceImplWin32 device32;
-    	PortableDeviceValuesImplWin32 input;
-    	PortableDeviceValuesImplWin32 results;
-    	COMException wpdError;
-    	long driverError;
-    	
-    	manager = new PortableDeviceManager();
-    	device = manager.getDevices()[0];
-    	device.open();
-    	
-    	PropertyKey commandKey = Win32WPDDefines.WPD_COMMAND_COMMON_RESET_DEVICE;
-    	
-    	device32 = (PortableDeviceImplWin32)device;
-    	try {
-    		input = new PortableDeviceValuesImplWin32();
-    		input.setGuidValue(Win32WPDDefines.WPD_PROPERTY_COMMON_COMMAND_CATEGORY, 
-        			commandKey.getFmtid());
-    		input.setUnsignedIntegerValue(Win32WPDDefines.WPD_PROPERTY_COMMON_COMMAND_ID, 
-        			commandKey.getPid());
-    		
-    		results = device32.sendCommand(input);
-    		
-    		//check for success or failure to carry out the command
-    		try {
-    			wpdError = results.getErrorValue(Win32WPDDefines.WPD_PROPERTY_COMMON_HRESULT);
-    		}
-    		catch(COMException e) {
-    			//ignore exception if "ERROR_NOT_FOUND" -> item not in collection
-    			if (e.getHresult() != Win32WPDDefines.ERROR_NOT_FOUND) {
-    				System.out.println("Error: " + e.getErrorCode());
-    			}
-    		}
-
-    		//check driver-specific error code
-    		try {
-    			driverError = results.getUnsignedIntegerValue(Win32WPDDefines.WPD_PROPERTY_COMMON_DRIVER_ERROR_CODE);
-    			System.out.println("Driver Error Code: " + driverError);
-    		}
-    		catch(COMException e) {
-    			//ignore exception if "ERROR_NOT_FOUND" -> item not in collection
-    			if (e.getHresult() != Win32WPDDefines.ERROR_NOT_FOUND) {
-    				System.out.println("Error: " + e.getErrorCode());
-    			}
-    		}
-    	}
-    	catch(COMException e) {
-    		System.out.println("Error: " + e.getErrorCode());
-    	}
-    	
-    	/*
-    	PortableDeviceStorageObject storage = (PortableDeviceStorageObject)device.getRootObjects()[0];
-    	PortableDeviceObject o = storage.getChildObjects()[5];
-    	o = ((PortableDeviceFolderObject)o).getChildObjects()[10];
-    	o = ((PortableDeviceFolderObject)o).getChildObjects()[0];
-    	o = ((PortableDeviceFolderObject)o).getChildObjects()[0];
-    	System.out.println(o.getOriginalFileName());
-    	System.out.println(o.getPersistentUniqueIdentifier());
-    	System.out.println();
-    	
-    	Date datum = ((PortableDeviceAudioObject)o).getReleaseDate();
-    	((PortableDeviceAudioObject)o).setReleaseDate(datum);
-    	System.out.println(((PortableDeviceAudioObject)o).getReleaseDate());
-    	*/
-    	
-    	
-    	PortableDeviceAudioObject o = (PortableDeviceAudioObject)device.getPortableDeviceObjectsFromPersistentUniqueIDs(id);
-    	System.out.println("Original File Name: " + o.getOriginalFileName());
-    	System.out.println("Duration: " + o.getDuraction());
-    	System.out.println("Size: " + o.getSize());
-    	System.out.println("Track Number: " + o.getTrackNumber());
-    	System.out.println("Duration: " + o.getDuraction());
-    	System.out.println("Use Count: " + o.getUseCount());
-    	
-    	
-    	//Date datum = Calendar.getInstance().getTime();
-    	Date datum = o.getReleaseDate();
-    	System.out.println(datum);
-    	o.setReleaseDate(datum);
-    	System.out.println("Release Date: " + o.getReleaseDate());
-    	
-    	/*
-    	PortableDeviceStorageObject storage = (PortableDeviceStorageObject)device.getRootObjects()[0];
-    	System.out.println("File System Type: " + storage.getFileSystemType());
-    	System.out.println("Description: " + storage.getDescription());
-    	System.out.println("Serial Number: " + storage.getSerialNumber());
-    	System.out.println("Capacity: " + storage.getCapacity());
-    	System.out.println("Free Space : " + storage.getFreeSpace());
-    	System.out.println("Type : " + storage.getType());
-    	*/
-    	device.close();
     }
 }

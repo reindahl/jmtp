@@ -35,7 +35,7 @@ import java.util.Set;
 class PortableDeviceManagerImplWin32 implements PortableDeviceManagerProxy {
     
     static {
-//    	TODO load correct version of the dll
+    	//load correct version of the dll
     	switch (System.getProperty("os.arch")) {
 		case "x86":
 			System.loadLibrary("jmtp32");
