@@ -51,7 +51,7 @@ JNIEXPORT jobject JNICALL Java_jmtp_PortableDevicePropertiesImplWin32_getPropert
 		ThrowCOMException(env, L"Failed to retrieve the property", hr);
 	}
 
-	BOOL del;
+	//BOOL del;
 	//hr = pValues->GetBoolValue(WPD_RESOURCE_ATTRIBUTE_CAN_DELETE, &del);;
 	//printf("naam: %i\n", del);
 

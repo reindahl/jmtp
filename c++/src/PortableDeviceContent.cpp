@@ -31,6 +31,10 @@
 
 #include <iostream>
 
+ // Copies data from a source stream to a destination stream using the
+ // specified cbTransferSize as the temporary buffer size.
+HRESULT StreamCopy(IStream *pDestStream, IStream *pSourceStream, DWORD cbTransferSize, DWORD *pcbWritten);
+
 
 using namespace std;
 
@@ -72,7 +76,7 @@ JNIEXPORT jstring JNICALL Java_jmtp_PortableDeviceContentImplWin32_createObjectW
 	wszFileLocation = (WCHAR*)env->GetStringChars(jsFileLocation, nullptr);
 	hr = SHCreateStreamOnFileW(wszFileLocation, STGM_READ, &pFileStream);
 	env->ReleaseStringChars(jsFileLocation, (jchar*)wszFileLocation); //string resources terug vrijgeven
-	cout << "test" << endl;
+
 	if(SUCCEEDED(hr))
 	{
 		// determine size of the file
@@ -81,23 +85,21 @@ JNIEXPORT jstring JNICALL Java_jmtp_PortableDeviceContentImplWin32_createObjectW
 		pDeviceObjectValues->SetUnsignedLargeIntegerValue(WPD_OBJECT_SIZE, fileStats.cbSize.QuadPart);
 
 		hr = pDeviceContent->CreateObjectWithPropertiesAndData(pDeviceObjectValues, &pDeviceStream, &dwBufferSize, nullptr);
-		cout << "test2" << endl;
+
 		if(SUCCEEDED(hr))
 		{
 			pDeviceStream->QueryInterface(IID_IPortableDeviceDataStream, (void**)&pDeviceDataStream);
 
+			DWORD totalBytesWritten = 0;
 			//copying data
-			pBuffer = new BYTE[dwBufferSize];
-			dwReadFromStream = 0;
-			do
+			hr = StreamCopy(pDeviceDataStream, pFileStream, dwBufferSize, &totalBytesWritten);
+
+			if (FAILED(hr))
 			{
-				pFileStream->Read(pBuffer, dwBufferSize, &dwReadFromStream);
-				pDeviceDataStream->Write(pBuffer, dwReadFromStream, nullptr);
+				wprintf(L"! Failed to transfer object to device, hr = 0x%lx\n", hr);
 			}
-			while(dwReadFromStream > 0);
-			delete[] pBuffer;
 			hr = pDeviceDataStream->Commit(STGC_DEFAULT);
-			cout << "test3" << endl;
+
 			if(SUCCEEDED(hr))
 			{
 				pDeviceDataStream->GetObjectID(&wszObjectID);
