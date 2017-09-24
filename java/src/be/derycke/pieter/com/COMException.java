@@ -11,8 +11,12 @@ public class COMException extends Exception {
 	 * Common HRESULT Values:
 	 * The following HRESULT values are the most common.
 	 * More values are contained in the header file Winerror.h.
+	 * 
+	 * Error codes can be found here (use last 4 characters of error code)
+	 * https://msdn.microsoft.com/en-us/library/windows/desktop/ms681382(v=vs.85).aspx
 	 */
 	public static final long S_OK = 0x00000000L; //Operation successful
+	public static final long E_FILENOTFOUND = 0x80070002L;
 	public static final long E_ABORT = 0x80004004L; //Operation aborted
 	public static final long E_ACCESSDENIED = 0x80070005L; //General access denied error
 	public static final long E_FAIL = 0x80004005L; //Unspecified failure
@@ -23,6 +27,9 @@ public class COMException extends Exception {
 	public static final long E_OUTOFMEMORY = 0x8007000EL; //Failed to allocate necessary memory
 	public static final long E_POINTER = 0x80004003L; //Pointer that is not valid
 	public static final long E_UNEXPECTED = 0x8000FFFFL; //Unexpected failure
+	public static final long E_DISK_FULL = 0x80070070L; //There is not enough space
+	public static final long E_NOT_FOUND = 0x80070490L; //The property specified by key is not in the collection.
+	public static final long E_NOT_SUPPORTED = 0x80070032L;
 	
 	/*
 	#define FACILITY_AAF               18  \\ 00000010010
@@ -52,8 +59,7 @@ public class COMException extends Exception {
 	#define FACILITY_WIN32              7  \\ 00000000111
 	#define FACILITY_WINDOWS            8  \\ 00000001000
 	#define FACILITY_WINDOWS_CE        24  \\ 00000011000
-	
-	bron: http://msdn2.microsoft.com/en-us/library/ms694497(VS.85).aspx
+
 	*/
 	
 	public static final int FACILITY_WIN32 = 7;

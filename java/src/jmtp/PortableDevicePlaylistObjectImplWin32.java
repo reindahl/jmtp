@@ -39,10 +39,9 @@ class PortableDevicePlaylistObjectImplWin32 extends PortableDeviceObjectImplWin3
             	properties.getValues(objectID, keyCollection).
             	getPortableDeviceValuesCollectionValue(Win32WPDDefines.WPD_OBJECT_REFERENCES);
             
-            //long naar int? misschien een probleem bij *enorm* grote afspeellijsten, 
-            //maar kan normaal wel niet gebeuren
-            PortableDeviceObject[] references = 
-            	new PortableDeviceObjectImplWin32[(int)propVariantCollection.count()];
+            // long to int? maybe a problem with * huge * big playlists,
+            // but usually can not happen
+            PortableDeviceObject[] references = new PortableDeviceObjectImplWin32[(int)propVariantCollection.count()];
             for(int i = 0; i < references.length; i++) {
             	references[i] = WPDImplWin32.convertToPortableDeviceObject(
             			(String)propVariantCollection.getAt(i).getValue(), content, properties);

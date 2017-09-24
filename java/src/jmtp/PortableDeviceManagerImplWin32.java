@@ -63,7 +63,7 @@ class PortableDeviceManagerImplWin32 implements PortableDeviceManagerProxy {
             deviceMap = new HashMap<String, PortableDeviceImplWin32>();
         }
         catch (Exception e) {
-            throw new RuntimeException("probleem met de com");
+            throw new RuntimeException("problem with COM");
         }
     }
     

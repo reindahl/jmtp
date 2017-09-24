@@ -54,7 +54,6 @@ public class MtpTest {
 		assertTrue(Files.exists(Paths.get(dir, filename)));
 		devices.get(0).addAudioObject(Paths.get(dir, filename).toFile());
 
-		
 	}
 	
 	
@@ -94,7 +93,7 @@ public class MtpTest {
 		for (PortableDeviceObject child : devices.get(0).getChildObjects()) {
 			if(!(child instanceof PortableDeviceFolderObject) && child.getName().equals(filename)){
 				foundFiles++;
-				child.get(Paths.get(dir));
+				child.copy(Paths.get(dir));
 			}
 
 			
@@ -104,4 +103,49 @@ public class MtpTest {
 		Files.deleteIfExists(Paths.get(dir, filename));
 	}
 
+	@Test
+	public void modifiedTest() throws IOException {
+		String filename= "Droid";
+		
+		ArrayList<PortableDeviceStorageObject> devices = new ArrayList<>();
+
+		PortableDeviceManager manager = new PortableDeviceManager();
+
+		for (PortableDevice device : manager) {
+			device.open();
+			
+			// Iterate over deviceObjects
+			for (PortableDeviceObject object : device.getRootObjects()) {
+
+				// If the object is a storage object
+				if (object instanceof PortableDeviceStorageObject) {
+					PortableDeviceStorageObject storage = (PortableDeviceStorageObject) object;
+					for (PortableDeviceObject child : storage.getChildObjects()) {
+						if (child.getOriginalFileName().equals("Droid")) {
+							devices.add(storage);
+							break;
+						}
+
+					}
+				}
+			}
+
+			device.close();
+		}
+		int foundFiles= 0;
+		assertEquals(1, devices.size());
+		for (PortableDeviceObject child : devices.get(0).getChildObjects()) {
+			if(!(child instanceof PortableDeviceFolderObject) && child.getName().equals(filename)){
+				foundFiles++;
+				System.out.println(child.getDateModified().getTime());
+				child.getDateModified().getTime();
+			}
+
+			
+		}
+		assertEquals(1, foundFiles);
+
+	}	
+	
+	
 }

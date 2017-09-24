@@ -8,10 +8,6 @@ public class Win32WPDDefines_original {
 	static final int PORTABLE_DEVICE_DELETE_NO_RECURSION  = 0;
 	static final int PORTABLE_DEVICE_DELETE_WITH_RECURSION  = 1;
 	static final long E_WPD_DEVICE_ALREADY_OPENED = 0x802A0001L; //The device connection has already been opened.
-	static final long ERROR_NOT_FOUND = 0x80070490L; //The property specified by key is not in the collection.
-	static final long ERROR_NOT_SUPPORTED = 0x80070032L;
-	static final long E_FILENOTFOUND = 0x80070002L;
-	
 	
 	static final Guid GUID_DEVINTERFACE_WPD = new Guid(0x6AC27878l, 0xA6FA, 0x4155, new short[]{0xBA, 0x85, 0xF9, 0x8F, 0x49, 0x1D, 0x4F, 0x33});
 	static final Guid GUID_DEVINTERFACE_WPD_PRIVATE = new Guid(0xBA0C718Fl, 0x4DED, 0x49B7, new short[]{0xBD, 0xD3, 0xFA, 0xBE, 0x28, 0x66, 0x12, 0x11});

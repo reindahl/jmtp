@@ -63,5 +63,5 @@ public interface PortableDeviceObject {
     
     public void delete();
     
-    public void get(Path to);
+    public void copy(Path to);
 }

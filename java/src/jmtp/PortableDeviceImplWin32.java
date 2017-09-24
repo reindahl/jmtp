@@ -52,7 +52,7 @@ class PortableDeviceImplWin32 implements PortableDevice {
     }
     
     /*
-     * In c++ geïmplementeerde methoden
+     * In c++ implemented methods
      */
     private native String getDeviceFriendlyName(String deviceID) throws COMException;
     private native String getDeviceManufacturer(String deviceID) throws COMException;
@@ -63,7 +63,7 @@ class PortableDeviceImplWin32 implements PortableDevice {
     public native PortableDeviceValuesImplWin32 sendCommand(PortableDeviceValuesImplWin32 values) throws COMException;
     
     /*
-     * In Java geïmplementeerde methoden
+     * In Java implemented methods
      */
     private void createStructures() throws COMException {
     	if(content == null)

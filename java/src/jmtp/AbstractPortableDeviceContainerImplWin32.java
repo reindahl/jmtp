@@ -96,7 +96,7 @@ abstract class AbstractPortableDeviceContainerImplWin32 extends PortableDeviceOb
 		}
 	}
 
-	BigInteger bigIntDummy =new BigInteger("1");
+	BigInteger bigIntDummy = new BigInteger("1");
 	public PortableDeviceAudioObject addAudioObject(File file) throws FileNotFoundException, IOException {
 		
 		return addAudioObject(file, "", "", bigIntDummy, null, null, null, -1);
@@ -135,9 +135,13 @@ abstract class AbstractPortableDeviceContainerImplWin32 extends PortableDeviceOb
 	        		this.content, this.properties);
 		}
 		catch(COMException e) {
-			if(e.getHresult() == Win32WPDDefines.E_FILENOTFOUND)
+			if(e.getHresult() == COMException.E_FILENOTFOUND)
 				throw new FileNotFoundException("File " + file + " was not found.");
-			else {
+			else if (e.getHresult() == COMException.E_DISK_FULL)
+				throw new IOException("Disk full");
+			else{
+				System.out.println(e.getErrorCode());
+				System.out.println(e.toString());
 				throw new IOException(e);
 			}
 		}
