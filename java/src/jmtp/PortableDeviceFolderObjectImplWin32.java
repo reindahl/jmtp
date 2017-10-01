@@ -25,7 +25,7 @@ import be.derycke.pieter.com.COMException;
  *
  * @author Pieter De Rycke
  */
-class PortableDeviceFolderObjectImplWin32 extends AbstractPortableDeviceContainerImplWin32 implements PortableDeviceFolderObject{
+class PortableDeviceFolderObjectImplWin32 extends PortableDeviceContainerImplWin32 implements PortableDeviceFolderObject{
 
     public PortableDeviceFolderObjectImplWin32(String objectID, PortableDeviceContentImplWin32 content,
             PortableDevicePropertiesImplWin32 properties) {

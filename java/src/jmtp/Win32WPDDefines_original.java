@@ -2,7 +2,7 @@ package jmtp;
 
 import be.derycke.pieter.com.Guid;
 
-public class Win32WPDDefines_original {
+class Win32WPDDefines_original {
 	//TODO pla missing van header
 	static final Guid WPD_OBJECT_FORMAT_PLA = new Guid(0xBA050000, 0xAE6C, 0x4804, new short[]{0x98, 0xBA, 0xC5, 0x7B, 0x46, 0x96, 0x5F, 0xe7});
 	static final int PORTABLE_DEVICE_DELETE_NO_RECURSION  = 0;

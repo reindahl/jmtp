@@ -21,7 +21,7 @@ package jmtp;
 
 import java.math.BigInteger;
 
-class PortableDeviceStorageObjectImplWin32 extends AbstractPortableDeviceContainerImplWin32 implements PortableDeviceStorageObject {
+class PortableDeviceStorageObjectImplWin32 extends PortableDeviceContainerImplWin32 implements PortableDeviceStorageObject {
 
 	PortableDeviceStorageObjectImplWin32(String objectID, PortableDeviceContentImplWin32 content,
 			PortableDevicePropertiesImplWin32 properties) {

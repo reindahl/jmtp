@@ -19,7 +19,7 @@
 
 package jmtp;
 
-public class PortableDeviceRenderingInformationObjectImplWin32 extends PortableDeviceObjectImplWin32 implements PortableDeviceRenderingInformationObject {
+class PortableDeviceRenderingInformationObjectImplWin32 extends PortableDeviceObjectImplWin32 implements PortableDeviceRenderingInformationObject {
 
 	PortableDeviceRenderingInformationObjectImplWin32(String objectID, PortableDeviceContentImplWin32 content,
 			PortableDevicePropertiesImplWin32 properties) {

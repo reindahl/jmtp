@@ -3,13 +3,10 @@ package jmtp;
 import static org.junit.Assert.*;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
-
 import org.junit.Test;
 
 import jmtp.PortableDevice;
@@ -55,7 +52,8 @@ public class MtpTest {
 
 		assertEquals(1, devices.size());
 		assertTrue(Files.exists(Paths.get(dir, filename)));
-		devices.get(0).addObject(Paths.get(dir, filename).toFile());
+		PortableDeviceObject object = devices.get(0).addObject(Paths.get(dir, filename).toFile());
+		object.delete();
 
 	}
 	
@@ -119,10 +117,8 @@ public class MtpTest {
 						break;
 					}	
 				}
-
 				object.delete();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				fail();
 			}

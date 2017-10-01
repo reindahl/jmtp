@@ -30,9 +30,9 @@ import be.derycke.pieter.com.COMException;
 import be.derycke.pieter.com.OleDate;
 
 //common class for storage and directory
-abstract class AbstractPortableDeviceContainerImplWin32 extends PortableDeviceObjectImplWin32 {
+class PortableDeviceContainerImplWin32 extends PortableDeviceObjectImplWin32 {
 	
-	AbstractPortableDeviceContainerImplWin32(String objectID, PortableDeviceContentImplWin32 content,
+	PortableDeviceContainerImplWin32(String objectID, PortableDeviceContentImplWin32 content,
 			PortableDevicePropertiesImplWin32 properties) {
 		
 		super(objectID, content, properties);

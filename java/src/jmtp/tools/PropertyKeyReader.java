@@ -138,7 +138,7 @@ public class PropertyKeyReader {
     	        
     			writer.write("import be.derycke.pieter.com.Guid;\n");
     	        writer.write("\n");
-    	        writer.write("public class " + className + " {\n");
+    	        writer.write("class " + className + " {\n");
     	        
     			writer.write(buffer.toString());
     			

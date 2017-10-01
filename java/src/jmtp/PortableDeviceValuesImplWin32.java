@@ -31,7 +31,7 @@ import be.derycke.pieter.com.Guid;
  *
  * @author Pieter De Rycke
  */
-public class PortableDeviceValuesImplWin32 implements COMReferenceable {
+class PortableDeviceValuesImplWin32 implements COMReferenceable {
     
     private COMReference pDeviceValues;
     

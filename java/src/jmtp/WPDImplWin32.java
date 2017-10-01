@@ -100,7 +100,7 @@ class WPDImplWin32 {
             	return new PortableDevicePlaylistObjectImplWin32(objectID, content, properties);
             }
             else if(contentType.equals(Win32WPDDefines.WPD_CONTENT_TYPE_FUNCTIONAL_OBJECT)) {
-            	//nagaan welk subtype
+            	//check which subtype
             	Guid category = values.getGuidValue(Win32WPDDefines.WPD_FUNCTIONAL_OBJECT_CATEGORY);
             	if(category.equals(Win32WPDDefines.WPD_FUNCTIONAL_CATEGORY_STORAGE)) {
             		return new PortableDeviceStorageObjectImplWin32(objectID, content, properties);
@@ -109,7 +109,7 @@ class WPDImplWin32 {
             		return new PortableDeviceRenderingInformationObjectImplWin32(objectID, content, properties);
             	}
             	else {
-            		//basis object terug geven
+            		//basic object
             		return new PortableDeviceObjectImplWin32(objectID, content, properties);
             	}
             }

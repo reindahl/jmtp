@@ -20,5 +20,5 @@
 package jmtp;
 
 public interface PortableDeviceFunctionalObject extends PortableDeviceObject {
-
+	//	WPD_CONTENT_TYPE_FUNCTIONAL_OBJECT
 }
