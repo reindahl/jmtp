@@ -287,6 +287,10 @@ class PortableDeviceObjectImplWin32 implements PortableDeviceObject {
 	public Guid getFormat() {
 		return retrieveGuidValue(Win32WPDDefines.WPD_OBJECT_FORMAT);
 	}
+	//TODO only give the guides temporarily -> create enums
+	public Guid getContentType() {
+		return retrieveGuidValue(Win32WPDDefines.WPD_OBJECT_CONTENT_TYPE);
+	}
 
 	public void setSyncID(String value) {
 		changeStringValue(Win32WPDDefines.WPD_OBJECT_SYNC_ID, value);

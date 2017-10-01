@@ -14,6 +14,7 @@ import java.util.Date;
 public interface PortableDeviceContainerObject extends PortableDeviceObject {
 	
     public PortableDeviceObject[] getChildObjects();
+    public PortableDeviceObject addObject(File file) throws FileNotFoundException, IOException;
     public PortableDeviceAudioObject addAudioObject(File file)  throws FileNotFoundException, IOException;
     public PortableDeviceAudioObject addAudioObject(File file, 
     		String artist, String title, BigInteger duration) throws FileNotFoundException, IOException;

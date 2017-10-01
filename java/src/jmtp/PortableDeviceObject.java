@@ -58,6 +58,7 @@ public interface PortableDeviceObject {
     public String getPersistentUniqueIdentifier();
     public String getSyncID();
     public Guid getFormat();
+    public Guid getContentType();
     
     public void setSyncID(String value);	//TODO can still throw an exception
     
