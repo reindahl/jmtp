@@ -52,7 +52,7 @@ public class MtpTest {
 
 		assertEquals(1, devices.size());
 		assertTrue(Files.exists(Paths.get(dir, filename)));
-		PortableDeviceObject object = devices.get(0).addObject(Paths.get(dir, filename).toFile());
+		PortableDeviceObject object = devices.get(0).addFileObject(Paths.get(dir, filename).toFile());
 		object.delete();
 
 	}
@@ -92,7 +92,7 @@ public class MtpTest {
 		for (File file : fdir.listFiles()) {
 			System.out.println(file);
 			try {
-				PortableDeviceObject object = devices.get(0).addObject(file);
+				PortableDeviceObject object = devices.get(0).addFileObject(file);
 				System.out.println(object.getFormat());
 				System.out.println(object.getContentType());
 				if (object.getOriginalFileName().endsWith("test")) {
