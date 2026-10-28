@@ -54,13 +54,13 @@ class PortableDeviceContainerImplWin32 extends PortableDeviceObjectImplWin32 {
 	
 	public PortableDeviceFolderObject createFolderObject(String name) {
 		try {
-			PortableDeviceValuesImplWin32 values = new PortableDeviceValuesImplWin32();
-			values.setStringValue(Win32WPDDefines.WPD_OBJECT_PARENT_ID, this.objectID);
-			values.setStringValue(Win32WPDDefines.WPD_OBJECT_ORIGINAL_FILE_NAME, name);
-			values.setStringValue(Win32WPDDefines.WPD_OBJECT_NAME, name);
-			values.setGuidValue(Win32WPDDefines.WPD_OBJECT_CONTENT_TYPE, Win32WPDDefines.WPD_CONTENT_TYPE_FOLDER);
+			PortableDeviceValuesImplWin32 deviceValues = new PortableDeviceValuesImplWin32();
+			deviceValues.setStringValue(Win32WPDDefines.WPD_OBJECT_PARENT_ID, this.objectID);
+			deviceValues.setStringValue(Win32WPDDefines.WPD_OBJECT_ORIGINAL_FILE_NAME, name);
+			deviceValues.setStringValue(Win32WPDDefines.WPD_OBJECT_NAME, name);
+			deviceValues.setGuidValue(Win32WPDDefines.WPD_OBJECT_CONTENT_TYPE, Win32WPDDefines.WPD_CONTENT_TYPE_FOLDER);
 			
-			return new PortableDeviceFolderObjectImplWin32(content.createObjectWithPropertiesOnly(values), this.content, this.properties);
+			return new PortableDeviceFolderObjectImplWin32(content.createObjectWithPropertiesOnly(deviceValues), this.content, this.properties);
         }
         catch (COMException e) {
         	System.err.println(name);
@@ -69,26 +69,26 @@ class PortableDeviceContainerImplWin32 extends PortableDeviceObjectImplWin32 {
         }
 	}
 	
-	//TODO references ondersteuning nog toevoegen
+	//TODO add references support
 	public PortableDevicePlaylistObject createPlaylistObject(String name,
 			PortableDeviceObject[] references) {
 		try {
-			PortableDeviceValuesImplWin32 values = new PortableDeviceValuesImplWin32();
-			values.setStringValue(Win32WPDDefines.WPD_OBJECT_PARENT_ID, this.objectID);
-			values.setStringValue(Win32WPDDefines.WPD_OBJECT_ORIGINAL_FILE_NAME, name + ".pla");
-			values.setStringValue(Win32WPDDefines.WPD_OBJECT_NAME, name);
-			values.setGuidValue(Win32WPDDefines.WPD_OBJECT_FORMAT, Win32WPDDefines.WPD_OBJECT_FORMAT_PLA);
-			values.setGuidValue(Win32WPDDefines.WPD_OBJECT_CONTENT_TYPE, Win32WPDDefines.WPD_CONTENT_TYPE_PLAYLIST);
+			PortableDeviceValuesImplWin32 deviceValues = new PortableDeviceValuesImplWin32();
+			deviceValues.setStringValue(Win32WPDDefines.WPD_OBJECT_PARENT_ID, this.objectID);
+			deviceValues.setStringValue(Win32WPDDefines.WPD_OBJECT_ORIGINAL_FILE_NAME, name + ".pla");
+			deviceValues.setStringValue(Win32WPDDefines.WPD_OBJECT_NAME, name);
+			deviceValues.setGuidValue(Win32WPDDefines.WPD_OBJECT_FORMAT, Win32WPDDefines.WPD_OBJECT_FORMAT_PLA);
+			deviceValues.setGuidValue(Win32WPDDefines.WPD_OBJECT_CONTENT_TYPE, Win32WPDDefines.WPD_CONTENT_TYPE_PLAYLIST);
 			
 			if(references != null) {
 				PortableDevicePropVariantCollectionImplWin32 propVariantCollection =
 					new PortableDevicePropVariantCollectionImplWin32();
 				for(PortableDeviceObject reference : references)
 					propVariantCollection.add(new PropVariant(reference.getID()));
-				values.setPortableDeviceValuesCollectionValue(Win32WPDDefines.WPD_OBJECT_REFERENCES, propVariantCollection);
+				deviceValues.setPortableDeviceValuesCollectionValue(Win32WPDDefines.WPD_OBJECT_REFERENCES, propVariantCollection);
 			}
 			
-			return new PortableDevicePlaylistObjectImplWin32(content.createObjectWithPropertiesOnly(values),
+			return new PortableDevicePlaylistObjectImplWin32(content.createObjectWithPropertiesOnly(deviceValues),
 	        		this.content, this.properties);
 		}
 		catch(COMException e) {
@@ -114,7 +114,7 @@ class PortableDeviceContainerImplWin32 extends PortableDeviceObjectImplWin32 {
 			if (mimetype == null){
 				mimetype = "";
 			}
-			System.out.println("hej");
+
 			if (mimetype.matches("^image/.*")) {
 				values.setGuidValue(Win32WPDDefines.WPD_OBJECT_CONTENT_TYPE, Win32WPDDefines.WPD_CONTENT_TYPE_IMAGE);
 				values.setGuidValue(Win32WPDDefines.WPD_OBJECT_FORMAT, Win32WPDDefines.WPD_OBJECT_FORMAT_UNSPECIFIED);
@@ -165,26 +165,24 @@ class PortableDeviceContainerImplWin32 extends PortableDeviceObjectImplWin32 {
 		if (Files.isDirectory(file.toPath())) {
 			return createFolderObject(file.getPath());
 		}
-		else {
-			return addFileObject(file);
-		}
+		return addFileObject(file);
 	}
 	
 	public PortableDeviceObject addFileObject(File file) throws FileNotFoundException, IOException {
 		try {
-			PortableDeviceValuesImplWin32 values = new PortableDeviceValuesImplWin32();
-			values.setStringValue(Win32WPDDefines.WPD_OBJECT_PARENT_ID, this.objectID); //common
-			values.setStringValue(Win32WPDDefines.WPD_OBJECT_ORIGINAL_FILE_NAME, file.getName()); //common
+			PortableDeviceValuesImplWin32 deviceValues = new PortableDeviceValuesImplWin32();
+			deviceValues.setStringValue(Win32WPDDefines.WPD_OBJECT_PARENT_ID, this.objectID); //common
+			deviceValues.setStringValue(Win32WPDDefines.WPD_OBJECT_ORIGINAL_FILE_NAME, file.getName()); //common
 			String name = file.getName();
 			int pos = name.lastIndexOf(".");
 			if (pos > 0) {
 			    name = name.substring(0, pos);
 			}
-			values.setStringValue(Win32WPDDefines.WPD_OBJECT_NAME, name); //common (simple name)
+			deviceValues.setStringValue(Win32WPDDefines.WPD_OBJECT_NAME, name); //common (simple name)
 			
-			setFileType(file, values);
+			setFileType(file, deviceValues);
 			
-	        return new PortableDeviceObjectImplWin32(content.createObjectWithPropertiesAndData(values, file),
+	        return new PortableDeviceObjectImplWin32(content.createObjectWithPropertiesAndData(deviceValues, file),
 	        		this.content, this.properties);
 		}
 		catch(COMException e) {

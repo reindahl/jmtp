@@ -29,7 +29,7 @@ public class COM {
     public static final long CLSCTX_INPROC_HANDLER = 0x2;
     
     /*
-     * Algemene COM methoden
+     * General COM method
      */ 
     public static native COMReference CoCreateInstance(CLSID rclsid, long pUnkOuter, long dwClsContext, 
             IID riid) throws COMException;
